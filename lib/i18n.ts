@@ -1,97 +1,125 @@
 export const locales = ["de", "en", "ko"] as const;
-
 export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = "de";
 
+export function isValidLocale(lang: string): lang is Locale {
+  return locales.includes(lang as Locale);
+}
+
 export const messages: Record<Locale, Record<string, string>> = {
   de: {
-    brand: "Dagleping Kids Badminton",
-    siteName: "Dagleping Kids Badminton",
+    // NAV
     navPrograms: "Jugendabteilung",
     navSchedule: "Trainingszeiten",
     navContact: "Kontakt",
 
-    heroBadge: "Badmintontraining für jedes Alter",
+    // HERO
+    heroBadge: "Badminton für jedes Alter",
     heroTitle1: "Training, Gemeinschaft",
     heroTitle2: "und Freude am Spiel",
     heroTitle3: "",
     heroDesc:
-      "SV Helios Daglfing Badminton bietet Training für Kinder, Jugendliche und Erwachsene - mit klarer Struktur, passenden Gruppen und einer offenen Vereinskultur.",
-    ctaPrimary: "Kostenlose Probestunde",
-    ctaSecondary: "Programme ansehen",
+      "SV Helios Daglfing Badminton bietet Training für Kinder, Jugendliche und Erwachsene – mit klarer Struktur, passenden Gruppen und einer offenen Vereinskultur.",
 
-    trust1Value: "5–13 Jahre",
-    trust1Label: "Altersgerechte Kurse",
-    trust2Value: "Kleine Gruppen",
-    trust2Label: "Individuelles Feedback",
-    trust3Value: "Probe möglich",
-    trust3Label: "Einfacher Einstieg",
+    ctaPrimary: "Kontakt aufnehmen",
+    ctaSecondary: "Mehr erfahren",
 
-    whyTitle: "Warum Dagleping?",
-    whyCard1Label: "Motivierender Einstieg",
-    whyCard1Title: "Spaß am ersten Badminton",
+    // WHY
+    whyTitle: "Warum Badminton bei SV Helios Daglfing?",
+
+    whyCard1Label: "Erfolg als Team",
+    whyCard1Title: "1. Platz in der Hobbyliga München Nord",
     whyCard1Desc:
-      "Spielerische Übungen und Grundtechniken helfen Kindern, sich leicht an den Sport zu gewöhnen.",
-    whyCard2Label: "Sichere Umgebung",
-    whyCard2Title: "Training mit klarer Struktur",
+      "Auch auf Einsteigerniveau zeigen wir, was als Team möglich ist. Unsere Mannschaft hat den 1. Platz in der Hobbyliga München Nord erreicht.",
+
+    whyCard2Label: "Offene Atmosphäre",
+    whyCard2Title: "Freundlich, respektvoll und unkompliziert",
     whyCard2Desc:
-      "Abläufe, Intensität und Bewegungswege werden passend zum Alter gestaltet.",
-    whyCard3Label: "Nachhaltige Entwicklung",
-    whyCard3Title: "Technik und Selbstvertrauen wachsen gemeinsam",
+      "Neue Mitglieder finden schnell Anschluss. Bei uns steht ein offenes, unterstützendes Miteinander im Mittelpunkt.",
+
+    whyCard3Label: "Für jedes Alter",
+    whyCard3Title: "Vom Jugendtraining bis zu Erwachsenen",
     whyCard3Desc:
-      "Kinder entwickeln Koordination, Grundtechnik und Freude an Bewegung Schritt für Schritt.",
+      "Seit Winter 2025 nehmen unsere Jugendspieler an Turnieren teil. Gleichzeitig trainieren bei uns Erwachsene aller Altersgruppen gemeinsam.",
 
+    // PROGRAMS
     programsEyebrow: "Programme",
-    programsTitle: "Kurse nach Alter und Niveau",
+    programsTitle: "Training für jedes Niveau",
     programsDesc:
-      "Eltern können die Kursstufen schnell vergleichen und direkt den passenden Kurs auswählen.",
-    program1Name: "Starter",
-    program1Age: "5–7 Jahre",
+      "Wir bieten Trainingsmöglichkeiten für Kinder, Jugendliche und Erwachsene – angepasst an Alter und Spielniveau.",
+
+    program1Name: "Einsteiger",
+    program1Age: "Alle Altersgruppen",
     program1Desc:
-      "Spielerischer Einstieg mit Schlägergefühl, Shuttle-Koordination und Grundbewegungen.",
-    program2Name: "Basic",
-    program2Age: "8–10 Jahre",
+      "Für alle, die neu mit Badminton beginnen und die Grundlagen lernen möchten.",
+
+    program2Name: "Fortgeschrittene",
+    program2Age: "Jugend & Erwachsene",
     program2Desc:
-      "Grundlagen wie Haltung, Aufschlag, Ballwechsel und Bewegung auf dem Feld.",
-    program3Name: "Grow",
-    program3Age: "11–13 Jahre",
+      "Für Spielerinnen und Spieler mit ersten Erfahrungen, die ihr Spiel verbessern möchten.",
+
+    program3Name: "Vereinsspieler",
+    program3Age: "Alle Altersgruppen",
     program3Desc:
-      "Mehr Spielsicherheit, bessere Ausdauer und stärkeres Selbstvertrauen auf dem Feld.",
-    chipPlay: "Spielerisch",
-    chipBasics: "Grundtechnik",
-    chipFocus: "Konzentration",
-    chipGrowth: "Fortschritt",
+      "Regelmäßiges Training für aktive Mitglieder mit Fokus auf Technik und Spielpraxis.",
 
-    coreEyebrow: "Unsere Werte",
-    coreTitle: "Spaß, Entwicklung und Sicherheit",
+    chipPlay: "Spiel",
+    chipBasics: "Grundlagen",
+    chipFocus: "Technik",
+    chipGrowth: "Entwicklung",
+
+    // CORE
+    coreEyebrow: "Unsere Philosophie",
+    coreTitle: "Gemeinsam besser werden",
     coreDesc:
-      "Ein gutes Kindertraining braucht nicht nur Energie, sondern auch Vertrauen, Struktur und klare Kommunikation.",
+      "Wir verbinden Training, Teamgeist und Spaß am Spiel – für nachhaltige Entwicklung im Verein.",
 
+    // SCHEDULE
     scheduleEyebrow: "Trainingszeiten",
-    scheduleTitle: "Trainingsplan auf einen Blick",
+    scheduleTitle: "Unsere Trainingszeiten",
     scheduleDesc:
-      "Die Zeiten sind klar gegliedert, damit Eltern schnell sehen, welcher Kurs passt.",
-    class1: "Starter",
-    class2: "Basic",
-    class3: "Grow",
-    time1: "Di · Do 16:00–16:50",
-    time2: "Di · Do 17:00–18:00",
-    time3: "Mo · Mi · Fr 18:00–19:00",
+      "Alle Trainingszeiten auf einen Blick – angepasst an Altersgruppen und Spielniveau.",
 
+    class1: "Erwachsene (O19)",
+    time1: "Freitag · 20:00 – 22:30",
+
+    class2: "Jugend (U19)",
+    time2: "Dienstag · 18:30 – 21:30",
+
+    class3: "",
+    time3: "",
+
+    // TRUST
+    trust1Value: "1.",
+    trust1Label: "Hobbyliga München Nord",
+
+    trust2Value: "2025",
+    trust2Label: "Start Jugendturniere",
+
+    trust3Value: "Alle",
+    trust3Label: "Altersgruppen",
+
+    // CONTACT
     contactEyebrow: "Kontakt",
-    contactTitle: "Finden Sie den passenden Kurs für Ihr Kind",
+    contactTitle: "Jetzt Kontakt aufnehmen",
     contactDesc:
-      "Im nächsten Schritt können wir echte Kontaktdaten, Adresse, WhatsApp- oder KakaoTalk-Link und Anmeldeformular verbinden.",
-    contactPrimary: "Probestunde anfragen",
-    contactSecondary: "Beratung anfragen",
+      "Interesse am Training? Kontaktiere uns und komm gerne zu einem Probetraining vorbei.",
+
+    contactPrimary: "E-Mail senden",
+    contactSecondary: "Mehr erfahren",
+
+    contactPerson1Role:
+      "Gesamtverantwortlicher der Badmintonabteilung sowie Ansprechpartner für den Erwachsenenbereich.",
+    contactPerson2Role:
+      "Ansprechpartner für das Leistungsteam der Jugendabteilung.",
+    contactPerson3Role: "Ansprechpartner für die Jugendabteilung.",
+    contactEmailButton: "E-Mail senden",
   },
 
   en: {
-    brand: "Dagleping Kids Badminton",
-    siteName: "Dagleping Kids Badminton",
-    navPrograms: "Youth Team",
-    navSchedule: "Training",
+    navPrograms: "Youth Training",
+    navSchedule: "Schedule",
     navContact: "Contact",
 
     heroBadge: "Badminton for all ages",
@@ -99,159 +127,182 @@ export const messages: Record<Locale, Record<string, string>> = {
     heroTitle2: "and joy in the game",
     heroTitle3: "",
     heroDesc:
-      "SV Helios Daglfing Badminton Club offers training for children, youth, and adults - with clear structure, suitable groups, and an open club culture.",
-    ctaPrimary: "Free Trial Class",
-    ctaSecondary: "View Programs",
+      "SV Helios Daglfing Badminton offers training for children, youth, and adults — with clear structure, suitable groups, and an open club culture.",
 
-    trust1Value: "Ages 5–13",
-    trust1Label: "Age-based classes",
-    trust2Value: "Small groups",
-    trust2Label: "Individual feedback",
-    trust3Value: "Trial available",
-    trust3Label: "Easy first step",
+    ctaPrimary: "Get in touch",
+    ctaSecondary: "Learn more",
 
-    whyTitle: "Why Dagleping?",
-    whyCard1Label: "Fun first step",
-    whyCard1Title: "A joyful introduction to badminton",
+    whyTitle: "Why SV Helios Daglfing Badminton?",
+
+    whyCard1Label: "Team success",
+    whyCard1Title: "1st place in Hobbyliga München Nord",
     whyCard1Desc:
-      "Play-based activities and fundamentals help children get comfortable with the sport.",
-    whyCard2Label: "Safe environment",
-    whyCard2Title: "Structured and reliable training",
+      "Even at beginner level, we show what is possible as a team. Our club achieved 1st place in the Hobbyliga München Nord.",
+
+    whyCard2Label: "Open atmosphere",
+    whyCard2Title: "Friendly, respectful and welcoming",
     whyCard2Desc:
-      "Intensity, movement, and class flow are adjusted by age group.",
-    whyCard3Label: "Steady growth",
-    whyCard3Title: "Skills and confidence grow together",
+      "New members quickly feel at home. We focus on a supportive and open club culture.",
+
+    whyCard3Label: "All ages",
+    whyCard3Title: "From youth to adults",
     whyCard3Desc:
-      "Children build coordination, technique, and confidence step by step.",
+      "Since winter 2025, our youth players participate in tournaments, while adults of all ages train together.",
 
     programsEyebrow: "Programs",
-    programsTitle: "Programs by age and level",
+    programsTitle: "Training for every level",
     programsDesc:
-      "Parents can compare levels at a glance and choose the right class easily.",
-    program1Name: "Starter",
-    program1Age: "Ages 5–7",
-    program1Desc:
-      "A playful introduction with racket handling, shuttle coordination, and basic movement.",
-    program2Name: "Basic",
-    program2Age: "Ages 8–10",
-    program2Desc:
-      "Core foundations such as stance, serve, rally, and court movement.",
-    program3Name: "Grow",
-    program3Age: "Ages 11–13",
-    program3Desc:
-      "Stronger game sense, better stamina, and more confidence on court.",
-    chipPlay: "Play-based",
-    chipBasics: "Fundamentals",
-    chipFocus: "Focus",
-    chipGrowth: "Progress",
+      "We offer training opportunities for children, youth, and adults tailored to age and level.",
 
-    coreEyebrow: "Core Value",
-    coreTitle: "Fun, growth, and safety",
+    program1Name: "Beginner",
+    program1Age: "All ages",
+    program1Desc: "For those starting badminton and learning the basics.",
+
+    program2Name: "Intermediate",
+    program2Age: "Youth & Adults",
+    program2Desc:
+      "For players with some experience who want to improve their skills.",
+
+    program3Name: "Club Players",
+    program3Age: "All ages",
+    program3Desc:
+      "Regular training for active members focusing on technique and gameplay.",
+
+    chipPlay: "Play",
+    chipBasics: "Basics",
+    chipFocus: "Technique",
+    chipGrowth: "Growth",
+
+    coreEyebrow: "Our philosophy",
+    coreTitle: "Growing together",
     coreDesc:
-      "Great children’s training needs energy, trust, structure, and clear communication.",
+      "We combine training, team spirit, and enjoyment of the game for long-term development.",
 
     scheduleEyebrow: "Schedule",
-    scheduleTitle: "Class schedule at a glance",
-    scheduleDesc:
-      "Timetable is organized clearly so parents can scan it quickly.",
-    class1: "Starter",
-    class2: "Basic",
-    class3: "Grow",
-    time1: "Tue · Thu 16:00–16:50",
-    time2: "Tue · Thu 17:00–18:00",
-    time3: "Mon · Wed · Fri 18:00–19:00",
+    scheduleTitle: "Training Schedule",
+    scheduleDesc: "All training times at a glance.",
+
+    class1: "Adults (O19)",
+    time1: "Friday · 20:00 – 22:30",
+
+    class2: "Youth",
+    time2: "Tuesday · 18:30 – 21:30",
+
+    class3: "",
+    time3: "",
+
+    trust1Value: "1st",
+    trust1Label: "Hobbyliga München Nord",
+
+    trust2Value: "2025",
+    trust2Label: "Youth tournaments",
+
+    trust3Value: "All",
+    trust3Label: "Age groups",
 
     contactEyebrow: "Contact",
-    contactTitle: "Find the right class for your child",
+    contactTitle: "Get in touch",
     contactDesc:
-      "Next, we can connect real contact details, address, messaging links, and a registration form.",
-    contactPrimary: "Book a Trial Class",
-    contactSecondary: "Ask for Consultation",
+      "Interested in training? Contact us and join a trial session.",
+
+    contactPrimary: "Send email",
+    contactSecondary: "Learn more",
+
+    contactPerson1Role:
+      "Head of the badminton department and contact person for the adult section.",
+    contactPerson2Role:
+      "Contact person for the youth department performance team.",
+    contactPerson3Role: "Contact person for the youth department.",
+    contactEmailButton: "Send email",
   },
 
   ko: {
-    brand: "Dagleping Kids Badminton",
-    siteName: "다글핑 배드민턴 어린이 부서",
     navPrograms: "유소년 훈련",
-    navSchedule: "트레이닝",
+    navSchedule: "시간표",
     navContact: "문의",
 
-    heroBadge: "온가족을 위한 배드민턴",
+    heroBadge: "전 연령을 위한 배드민턴",
     heroTitle1: "훈련과 커뮤니티,",
-    heroTitle2: "그리고 즐거움",
+    heroTitle2: "그리고 배드민턴의 즐거움",
     heroTitle3: "",
     heroDesc:
-      "SV Helios Daglfing Badminton Club은 어린이, 청소년, 성인을 위한 훈련을 제공합니다. 체계적인 운영, 연령에 맞는 그룹, 그리고 열린 클럽 문화를 지향합니다.",
-    ctaPrimary: "무료 체험 신청",
-    ctaSecondary: "프로그램 보기",
+      "SV Helios Daglfing Badminton은 어린이, 청소년, 성인을 위한 훈련을 제공합니다.",
 
-    trust1Value: "5–13세",
-    trust1Label: "연령별 반 운영",
-    trust2Value: "소수 정원",
-    trust2Label: "밀도 있는 피드백",
-    trust3Value: "체험 가능",
-    trust3Label: "부담 없는 시작",
+    ctaPrimary: "문의하기",
+    ctaSecondary: "더 알아보기",
 
-    whyTitle: "왜 다글핑인가요?",
-    whyCard1Label: "즐거운 시작",
-    whyCard1Title: "첫 배드민턴을 재미있게",
-    whyCard1Desc:
-      "놀이와 기본기를 함께 구성해 아이가 운동에 자연스럽게 익숙해지도록 돕습니다.",
-    whyCard2Label: "안전한 환경",
-    whyCard2Title: "구조가 명확한 수업",
+    whyTitle: "왜 SV Helios Daglfing인가요?",
+
+    whyCard1Label: "팀 성과",
+    whyCard1Title: "Hobbyliga München Nord 1위",
+    whyCard1Desc: "초급 리그지만 팀으로서 1위를 달성했습니다.",
+
+    whyCard2Label: "친근한 분위기",
+    whyCard2Title: "누구나 쉽게 적응",
     whyCard2Desc:
-      "연령에 따라 수업 강도와 동선, 흐름을 다르게 설계합니다.",
-    whyCard3Label: "지속적인 성장",
-    whyCard3Title: "실력과 자신감이 함께 자라도록",
-    whyCard3Desc:
-      "기초 체력, 기술, 협동심을 단계적으로 키워갑니다.",
+      "친절하고 열린 분위기로 누구나 쉽게 클럽에 적응할 수 있습니다.",
+
+    whyCard3Label: "전 연령 참여",
+    whyCard3Title: "유소년부터 성인까지",
+    whyCard3Desc: "유소년 선수부터 성인까지 함께 활동하는 클럽입니다.",
 
     programsEyebrow: "프로그램",
-    programsTitle: "연령과 수준에 맞춘 프로그램",
-    programsDesc:
-      "부모가 반을 빠르게 비교하고, 우리 아이에게 맞는 수업을 쉽게 고를 수 있습니다.",
-    program1Name: "스타터",
-    program1Age: "5–7세",
-    program1Desc:
-      "라켓 잡기, 셔틀 감각, 기초 움직임을 놀이형으로 배우는 입문 수업.",
-    program2Name: "베이직",
-    program2Age: "8–10세",
-    program2Desc:
-      "자세, 서비스, 랠리, 코트 이동 등 핵심 기초를 다지는 수업.",
-    program3Name: "그로우",
-    program3Age: "11–13세",
-    program3Desc:
-      "경기 감각, 체력, 자신감을 함께 키우는 성장 단계 수업.",
-    chipPlay: "놀이 중심",
-    chipBasics: "기초 기술",
-    chipFocus: "집중력",
-    chipGrowth: "성장 단계",
+    programsTitle: "모든 수준을 위한 훈련",
+    programsDesc: "연령과 수준에 맞춘 훈련을 제공합니다.",
 
-    coreEyebrow: "핵심 가치",
-    coreTitle: "재미, 성장, 안전의 균형",
-    coreDesc:
-      "좋은 어린이 수업은 에너지뿐 아니라 신뢰, 구조, 명확한 안내가 함께 있어야 합니다.",
+    program1Name: "입문",
+    program1Age: "전 연령",
+    program1Desc: "배드민턴을 처음 시작하는 분들을 위한 과정.",
 
-    scheduleEyebrow: "시간표",
-    scheduleTitle: "한눈에 보는 수업 시간",
-    scheduleDesc:
-      "부모가 빠르게 스캔할 수 있도록 시간표를 명확하게 정리했습니다.",
-    class1: "스타터",
-    class2: "베이직",
-    class3: "그로우",
-    time1: "화 · 목 16:00–16:50",
-    time2: "화 · 목 17:00–18:00",
-    time3: "월 · 수 · 금 18:00–19:00",
+    program2Name: "중급",
+    program2Age: "청소년/성인",
+    program2Desc: "기본기를 갖춘 플레이어를 위한 과정.",
+
+    program3Name: "클럽 선수",
+    program3Age: "전 연령",
+    program3Desc: "정기적으로 훈련하는 회원 대상.",
+
+    chipPlay: "플레이",
+    chipBasics: "기초",
+    chipFocus: "기술",
+    chipGrowth: "성장",
+
+    coreEyebrow: "철학",
+    coreTitle: "함께 성장하는 클럽",
+    coreDesc: "훈련과 팀워크, 즐거움을 동시에 추구합니다.",
+
+    scheduleEyebrow: "훈련 시간",
+    scheduleTitle: "훈련 시간표",
+    scheduleDesc: "모든 훈련 시간을 한눈에 확인하세요.",
+
+    class1: "성인 (O19)",
+    time1: "금요일 · 20:00 – 22:30",
+
+    class2: "유소년",
+    time2: "화요일 · 18:30 – 21:30",
+
+    class3: "",
+    time3: "",
+
+    trust1Value: "1위",
+    trust1Label: "Hobbyliga München Nord",
+
+    trust2Value: "2025",
+    trust2Label: "유소년 대회 시작",
+
+    trust3Value: "전 연령",
+    trust3Label: "참여",
 
     contactEyebrow: "문의",
-    contactTitle: "우리 아이에게 맞는 반을 찾아보세요",
-    contactDesc:
-      "다음 단계에서 실제 연락처, 주소, 메신저 링크, 신청 폼까지 연결하면 바로 운영 가능한 사이트가 됩니다.",
-    contactPrimary: "체험 수업 신청",
-    contactSecondary: "상담 문의",
+    contactTitle: "문의하기",
+    contactDesc: "훈련에 관심이 있으시면 연락 주세요.",
+
+    contactPrimary: "이메일 보내기",
+    contactSecondary: "더 알아보기",
+
+    contactPerson1Role: "배드민턴 부서 총 책임자 및 성인부 담당자",
+    contactPerson2Role: "유소년 부서 Leistungsteam 담당자",
+    contactPerson3Role: "유소년 부서 담당자",
+    contactEmailButton: "이메일 보내기",
   },
 };
-
-export function isValidLocale(value: string): value is Locale {
-  return locales.includes(value as Locale);
-}
