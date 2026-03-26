@@ -1,11 +1,18 @@
-export default function RootLayout({
+import { notFound } from "next/navigation";
+import { isValidLocale } from "@/lib/i18n";
+
+export default async function LocaleLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ lang: string }>;
 }) {
-  return (
-    <html lang="de">
-      <body>{children}</body>
-    </html>
-  );
+  const { lang } = await params;
+
+  if (!isValidLocale(lang)) {
+    notFound();
+  }
+
+  return <>{children}</>;
 }

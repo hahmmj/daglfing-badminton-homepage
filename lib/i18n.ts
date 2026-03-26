@@ -8,16 +8,16 @@ export const messages: Record<Locale, Record<string, string>> = {
   de: {
     brand: "Dagleping Kids Badminton",
     siteName: "Dagleping Kids Badminton",
-    navPrograms: "Programme",
+    navPrograms: "Jugendabteilung",
     navSchedule: "Trainingszeiten",
     navContact: "Kontakt",
 
-    heroBadge: "Badmintontraining für Kinder",
-    heroTitle1: "Kinder haben Spaß,",
-    heroTitle2: "Eltern haben Vertrauen",
-    heroTitle3: "in unser Training",
+    heroBadge: "Badmintontraining für jedes Alter",
+    heroTitle1: "Training, Gemeinschaft",
+    heroTitle2: "und Freude am Spiel",
+    heroTitle3: "",
     heroDesc:
-      "Unser Kinderprogramm ist klar strukturiert, sicher organisiert und altersgerecht aufgebaut. So finden Eltern schnell den passenden Kurs für ihr Kind.",
+      "SV Helios Daglfing Badminton bietet Training für Kinder, Jugendliche und Erwachsene - mit klarer Struktur, passenden Gruppen und einer offenen Vereinskultur.",
     ctaPrimary: "Kostenlose Probestunde",
     ctaSecondary: "Programme ansehen",
 
@@ -90,16 +90,16 @@ export const messages: Record<Locale, Record<string, string>> = {
   en: {
     brand: "Dagleping Kids Badminton",
     siteName: "Dagleping Kids Badminton",
-    navPrograms: "Programs",
-    navSchedule: "Schedule",
+    navPrograms: "Youth Team",
+    navSchedule: "Training",
     navContact: "Contact",
 
-    heroBadge: "Badminton training for children",
-    heroTitle1: "Kids enjoy moving,",
-    heroTitle2: "parents feel confident",
-    heroTitle3: "about the program",
+    heroBadge: "Badminton for all ages",
+    heroTitle1: "Training, community",
+    heroTitle2: "and joy in the game",
+    heroTitle3: "",
     heroDesc:
-      "Our children’s program is structured, safe, and age-appropriate, helping parents find the right class quickly.",
+      "SV Helios Daglfing Badminton Club offers training for children, youth, and adults - with clear structure, suitable groups, and an open club culture.",
     ctaPrimary: "Free Trial Class",
     ctaSecondary: "View Programs",
 
@@ -172,16 +172,16 @@ export const messages: Record<Locale, Record<string, string>> = {
   ko: {
     brand: "Dagleping Kids Badminton",
     siteName: "다글핑 배드민턴 어린이 부서",
-    navPrograms: "프로그램",
-    navSchedule: "시간표",
+    navPrograms: "유소년 훈련",
+    navSchedule: "트레이닝",
     navContact: "문의",
 
-    heroBadge: "어린이 배드민턴 클래스",
-    heroTitle1: "아이는 즐겁게 뛰고,",
-    heroTitle2: "부모는 안심하는",
-    heroTitle3: "배드민턴 수업",
+    heroBadge: "온가족을 위한 배드민턴",
+    heroTitle1: "훈련과 커뮤니티,",
+    heroTitle2: "그리고 즐거움",
+    heroTitle3: "",
     heroDesc:
-      "다글핑 어린이 프로그램은 연령별로 구조화되어 있고 안전하게 운영됩니다. 부모가 빠르게 우리 아이에게 맞는 반을 찾을 수 있도록 설계했습니다.",
+      "SV Helios Daglfing Badminton Club은 어린이, 청소년, 성인을 위한 훈련을 제공합니다. 체계적인 운영, 연령에 맞는 그룹, 그리고 열린 클럽 문화를 지향합니다.",
     ctaPrimary: "무료 체험 신청",
     ctaSecondary: "프로그램 보기",
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isValidLocale, messages, type Locale } from "@/lib/i18n";
@@ -43,7 +44,7 @@ export default async function HomePage({
     notFound();
   }
 
-  const t = messages[lang];
+  const t = messages[lang] ?? messages.de;
 
   const highlights = [
     {
@@ -99,45 +100,96 @@ export default async function HomePage({
   return (
     <main className="min-h-screen bg-[#F4F4F4] text-[#1E1E1E]">
       <header className="sticky top-0 z-40 border-b border-[#D8E1EA] bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div>
-            <div className="text-[11px] font-medium uppercase tracking-[0.24em] text-[#3E5F87]">
-              {t.brand}
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:py-5">
+          <div className="flex items-center gap-4">
+            <Image
+              src="/logo.png"
+              alt="SV Helios Daglfing Badminton Club"
+              width={200}
+              height={200}
+              className="h-12 w-auto object-contain md:h-14 lg:h-16"
+            />
+
+            <div className="leading-tight">
+              <div className="text-[10px] font-medium tracking-[0.24em] text-[#3E5F87] md:text-xs">
+                SV HELIOS DAGLFING
+              </div>
+              <div className="text-base font-semibold text-[#1E1E1E] md:text-lg">
+                BADMINTON CLUB
+              </div>
             </div>
-            <div className="mt-1 text-lg font-semibold">{t.siteName}</div>
           </div>
 
           <div className="hidden items-center gap-8 md:flex">
             <nav className="flex items-center gap-6 text-sm text-slate-600">
-              <a href="#programs" className="transition hover:text-[#1E1E1E]">
-                {t.navPrograms}
-              </a>
               <a href="#schedule" className="transition hover:text-[#1E1E1E]">
                 {t.navSchedule}
+              </a>
+              <a href="#jugend" className="transition hover:text-[#1E1E1E]">
+                {t.navPrograms}
               </a>
               <a href="#contact" className="transition hover:text-[#1E1E1E]">
                 {t.navContact}
               </a>
             </nav>
+
             <LanguageSwitcher lang={lang} />
           </div>
+
+          <details className="md:hidden">
+            <summary className="flex cursor-pointer list-none items-center rounded-full border border-[#D8E1EA] bg-white px-4 py-2 text-sm font-medium text-[#3E5F87]">
+              Menu
+            </summary>
+
+            <div className="absolute right-6 top-[84px] w-[290px] rounded-[28px] border border-[#D8E1EA] bg-white p-5 shadow-[0_20px_40px_rgba(15,23,42,0.12)]">
+              <div className="mb-4">
+                <LanguageSwitcher lang={lang} />
+              </div>
+
+              <nav className="flex flex-col gap-2 text-sm text-slate-700">
+                <a
+                  href="#schedule"
+                  className="rounded-2xl px-3 py-2 transition hover:bg-[#F8FAFC]"
+                >
+                  {t.navSchedule}
+                </a>
+                <a
+                  href="#jugend"
+                  className="rounded-2xl px-3 py-2 transition hover:bg-[#F8FAFC]"
+                >
+                  {t.navPrograms}
+                </a>
+                <a
+                  href="#contact"
+                  className="rounded-2xl px-3 py-2 transition hover:bg-[#F8FAFC]"
+                >
+                  {t.navContact}
+                </a>
+              </nav>
+            </div>
+          </details>
         </div>
       </header>
 
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(107,151,197,0.22),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(175,195,218,0.28),_transparent_28%)]" />
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:py-24">
+
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:py-24">
           <div>
             <div className="inline-flex items-center rounded-full border border-[#AFC3DA] bg-[#E7EEF6] px-4 py-1.5 text-sm font-medium text-[#3E5F87]">
               {t.heroBadge}
             </div>
 
-            <h1 className="mt-6 max-w-4xl text-4xl font-semibold tracking-tight md:text-6xl md:leading-[1.08]">
+            <h1 className="mt-6 max-w-4xl text-4xl font-semibold tracking-tight text-[#1E1E1E] md:text-6xl md:leading-[1.05]">
               {t.heroTitle1}
               <br />
               {t.heroTitle2}
-              <br />
-              {t.heroTitle3}
+              {t.heroTitle3 ? (
+                <>
+                  <br />
+                  {t.heroTitle3}
+                </>
+              ) : null}
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
@@ -147,12 +199,13 @@ export default async function HomePage({
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#contact"
-                className="rounded-full bg-[#6b97c5] px-6 py-3 text-sm font-medium text-white shadow-sm transition hover:shadow-md"
+                className="rounded-full bg-[#6b97c5] px-6 py-3 text-sm font-medium text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 {t.ctaPrimary}
               </a>
+
               <a
-                href="#programs"
+                href="#jugend"
                 className="rounded-full border border-[#C9D5E2] bg-white px-6 py-3 text-sm font-medium text-[#3E5F87] transition hover:bg-[#F8FAFC]"
               >
                 {t.ctaSecondary}
@@ -165,10 +218,12 @@ export default async function HomePage({
                   key={item.label}
                   className="rounded-[28px] border border-[#D8E1EA] bg-white p-5 shadow-[0_1px_2px_rgba(15,23,42,0.06)]"
                 >
-                  <div className="text-2xl font-semibold tracking-tight">
+                  <div className="text-2xl font-semibold tracking-tight text-[#1E1E1E]">
                     {item.value}
                   </div>
-                  <div className="mt-1 text-sm text-slate-600">{item.label}</div>
+                  <div className="mt-1 text-sm text-slate-600">
+                    {item.label}
+                  </div>
                 </div>
               ))}
             </div>
@@ -189,7 +244,9 @@ export default async function HomePage({
                     <div className="text-xs font-medium uppercase tracking-[0.18em] text-[#3E5F87]">
                       {item.label}
                     </div>
-                    <div className="mt-1 text-lg font-medium">{item.title}</div>
+                    <div className="mt-1 text-lg font-medium text-[#1E1E1E]">
+                      {item.title}
+                    </div>
                     <p className="mt-2 text-sm leading-6 text-slate-600">
                       {item.desc}
                     </p>
@@ -201,7 +258,7 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section id="programs" className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
+      <section id="jugend" className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
         <div className="max-w-2xl">
           <div className="text-sm font-medium uppercase tracking-[0.18em] text-[#3E5F87]">
             {t.programsEyebrow}
@@ -218,14 +275,16 @@ export default async function HomePage({
           {programs.map((program) => (
             <article
               key={program.name}
-              className="rounded-[32px] bg-white p-6 shadow-[0_1px_3px_rgba(15,23,42,0.08)] ring-1 ring-[#D8E1EA] transition hover:shadow-[0_12px_28px_rgba(15,23,42,0.10)]"
+              className="rounded-[32px] bg-white p-6 shadow-[0_1px_3px_rgba(15,23,42,0.08)] ring-1 ring-[#D8E1EA] transition hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(15,23,42,0.10)]"
             >
               <div className="inline-flex rounded-full bg-[#E7EEF6] px-3 py-1 text-sm font-medium text-[#3E5F87] ring-1 ring-[#D6E2EE]">
                 {program.age}
               </div>
-              <h3 className="mt-4 text-2xl font-semibold tracking-tight">
+
+              <h3 className="mt-4 text-2xl font-semibold tracking-tight text-[#1E1E1E]">
                 {program.name}
               </h3>
+
               <p className="mt-4 text-sm leading-7 text-slate-600">
                 {program.description}
               </p>
@@ -251,10 +310,14 @@ export default async function HomePage({
             <div className="text-sm font-medium uppercase tracking-[0.18em] text-[#DCE7F2]">
               {t.coreEyebrow}
             </div>
+
             <h2 className="mt-3 text-3xl font-semibold tracking-tight">
               {t.coreTitle}
             </h2>
-            <p className="mt-4 text-sm leading-7 text-[#E7EEF6]">{t.coreDesc}</p>
+
+            <p className="mt-4 text-sm leading-7 text-[#E7EEF6]">
+              {t.coreDesc}
+            </p>
           </div>
 
           <div className="grid gap-4 md:grid-cols-3">
@@ -266,9 +329,11 @@ export default async function HomePage({
                 <div className="text-sm font-medium text-[#3E5F87]">
                   {item.label}
                 </div>
-                <div className="mt-3 text-xl font-semibold tracking-tight">
+
+                <div className="mt-3 text-xl font-semibold tracking-tight text-[#1E1E1E]">
                   {item.title}
                 </div>
+
                 <p className="mt-3 text-sm leading-6 text-slate-600">
                   {item.desc}
                 </p>
@@ -284,9 +349,11 @@ export default async function HomePage({
             <div className="text-sm font-medium uppercase tracking-[0.18em] text-[#3E5F87]">
               {t.scheduleEyebrow}
             </div>
+
             <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
               {t.scheduleTitle}
             </h2>
+
             <p className="mt-4 text-base leading-7 text-slate-600">
               {t.scheduleDesc}
             </p>
@@ -299,7 +366,9 @@ export default async function HomePage({
                   key={item.className}
                   className="flex flex-col gap-2 rounded-[24px] border border-[#D8E1EA] bg-[#F8FAFC] px-5 py-4 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div className="text-base font-medium">{item.className}</div>
+                  <div className="text-base font-medium text-[#1E1E1E]">
+                    {item.className}
+                  </div>
                   <div className="text-sm text-slate-600">{item.time}</div>
                 </div>
               ))}
@@ -315,9 +384,11 @@ export default async function HomePage({
               <div className="text-sm font-medium uppercase tracking-[0.18em] text-[#DCE7F2]">
                 {t.contactEyebrow}
               </div>
+
               <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
                 {t.contactTitle}
               </h2>
+
               <p className="mt-4 max-w-2xl text-base leading-7 text-[#EEF3F8]">
                 {t.contactDesc}
               </p>
@@ -330,6 +401,7 @@ export default async function HomePage({
               >
                 {t.contactPrimary}
               </a>
+
               <a
                 href="#"
                 className="rounded-full border border-white/30 px-6 py-3 text-center text-sm font-medium text-white transition hover:bg-white/10"
