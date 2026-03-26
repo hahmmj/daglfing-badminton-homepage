@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import HomeTopLink from "@/app/components/HomeTopLink";
 import { isValidLocale, messages, type Locale } from "@/lib/i18n";
 
 function LanguageSwitcher({ lang }: { lang: Locale }) {
@@ -101,7 +102,10 @@ export default async function HomePage({
     <main className="min-h-screen bg-[#F4F4F4] text-[#1E1E1E]">
       <header className="sticky top-0 z-40 border-b border-[#D8E1EA] bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:py-5">
-          <div className="flex items-center gap-4">
+          <HomeTopLink
+            lang={lang}
+            className="flex items-center gap-4 rounded-2xl transition hover:opacity-90"
+          >
             <Image
               src="/logo.png"
               alt="SV Helios Daglfing Badminton Club"
@@ -118,7 +122,7 @@ export default async function HomePage({
                 BADMINTON CLUB
               </div>
             </div>
-          </div>
+          </HomeTopLink>
 
           <div className="hidden items-center gap-8 md:flex">
             <nav className="flex items-center gap-6 text-sm text-slate-600">
@@ -344,178 +348,186 @@ export default async function HomePage({
       </section>
 
       <section id="schedule" className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
-  <div className="mb-8">
-    <div className="text-sm font-medium uppercase tracking-[0.18em] text-[#3E5F87]">
-      {t.scheduleEyebrow}
-    </div>
+        <div className="mb-8">
+          <div className="text-sm font-medium uppercase tracking-[0.18em] text-[#3E5F87]">
+            {t.scheduleEyebrow}
+          </div>
 
-    <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-      {t.scheduleTitle}
-    </h2>
-  </div>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+            {t.scheduleTitle}
+          </h2>
+        </div>
 
-  <div className="rounded-[32px] bg-white p-6 shadow-[0_1px_3px_rgba(15,23,42,0.08)] ring-1 ring-[#D8E1EA] md:p-7">
-    <div className="space-y-4">
-      {schedule.map((item) => {
-        const [dayRaw, timeRaw] = item.time.split("·");
-        const day = dayRaw?.trim() ?? "";
-        const time = timeRaw?.trim() ?? item.time;
+        <div className="rounded-[32px] bg-white p-6 shadow-[0_1px_3px_rgba(15,23,42,0.08)] ring-1 ring-[#D8E1EA] md:p-7">
+          <div className="space-y-4">
+            {schedule.map((item) => {
+              const [dayRaw, timeRaw] = item.time.split("·");
+              const day = dayRaw?.trim() ?? "";
+              const time = timeRaw?.trim() ?? item.time;
 
-        return (
-          <div
-            key={item.className}
-            className="flex flex-col gap-3 rounded-[24px] border border-[#D8E1EA] bg-[#F8FAFC] px-6 py-5 sm:flex-row sm:items-center sm:justify-between"
-          >
+              return (
+                <div
+                  key={item.className}
+                  className="flex flex-col gap-3 rounded-[24px] border border-[#D8E1EA] bg-[#F8FAFC] px-6 py-5 sm:flex-row sm:items-center sm:justify-between"
+                >
+                  <div>
+                    <div className="text-lg font-medium text-[#1E1E1E]">
+                      {item.className}
+                    </div>
+                    <div className="mt-1 text-xs uppercase tracking-wider text-[#6b97c5]">
+                      {day}
+                    </div>
+                  </div>
+
+                  <div className="text-sm font-medium text-slate-600">
+                    {time}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
             <div>
-              <div className="text-lg font-medium text-[#1E1E1E]">
-                {item.className}
+              <div className="mb-4 rounded-[24px] border border-[#D8E1EA] bg-[#F8FAFC] px-6 py-5">
+                <div className="text-xs font-medium uppercase tracking-[0.18em] text-[#3E5F87]">
+                  Erwachsene (O19)
+                </div>
+                <div className="mt-2 text-base font-medium text-[#1E1E1E]">
+                  Turnhalle der Fachoberschule für Technik
+                </div>
+                <p className="mt-1 text-sm leading-6 text-slate-600">
+                  Orleansstraße 44
+                </p>
+
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Turnhalle+der+Fachoberschule+f%C3%BCr+Technik,+Orleansstra%C3%9Fe+44,+M%C3%BCnchen"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 inline-flex rounded-full border border-[#C9D5E2] bg-white px-4 py-2 text-sm font-medium text-[#3E5F87] transition hover:-translate-y-0.5 hover:bg-[#F8FAFC] hover:shadow-sm"
+                >
+                  Google Maps öffnen
+                </a>
               </div>
-              <div className="mt-1 text-xs uppercase tracking-wider text-[#6b97c5]">
-                {day}
+
+              <div className="overflow-hidden rounded-[24px] border border-[#D8E1EA]">
+                <iframe
+                  title="Erwachsene Training Location Map"
+                  src="https://www.google.com/maps?q=Turnhalle+der+Fachoberschule+f%C3%BCr+Technik,+Orleansstra%C3%9Fe+44,+M%C3%BCnchen&z=16&output=embed"
+                  width="100%"
+                  height="340"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
             </div>
 
-            <div className="text-sm font-medium text-slate-600">{time}</div>
-          </div>
-        );
-      })}
-    </div>
+            <div>
+              <div className="mb-4 rounded-[24px] border border-[#D8E1EA] bg-[#F8FAFC] px-6 py-5">
+                <div className="text-xs font-medium uppercase tracking-[0.18em] text-[#3E5F87]">
+                  Jugend
+                </div>
+                <div className="mt-2 text-base font-medium text-[#1E1E1E]">
+                  Wilhelm-Hausenstein-Gymnasium München
+                </div>
+                <p className="mt-1 text-sm leading-6 text-slate-600">
+                  Fideliostraße 145
+                </p>
 
-    <div className="mt-8 grid gap-6 lg:grid-cols-2">
-      <div>
-        <div className="mb-4 rounded-[24px] border border-[#D8E1EA] bg-[#F8FAFC] px-6 py-5">
-          <div className="text-xs font-medium uppercase tracking-[0.18em] text-[#3E5F87]">
-            Erwachsene (O19)
-          </div>
-          <div className="mt-2 text-base font-medium text-[#1E1E1E]">
-            Turnhalle der Fachoberschule für Technik
-          </div>
-          <p className="mt-1 text-sm leading-6 text-slate-600">
-            Orleansstraße 44
-          </p>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Wilhelm-Hausenstein-Gymnasium+M%C3%BCnchen,+Fideliostra%C3%9Fe+145,+M%C3%BCnchen"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 inline-flex rounded-full border border-[#C9D5E2] bg-white px-4 py-2 text-sm font-medium text-[#3E5F87] transition hover:-translate-y-0.5 hover:bg-[#F8FAFC] hover:shadow-sm"
+                >
+                  Google Maps öffnen
+                </a>
+              </div>
 
-          <a
-            href="https://www.google.com/maps/search/?api=1&query=Turnhalle+der+Fachoberschule+f%C3%BCr+Technik,+Orleansstra%C3%9Fe+44,+M%C3%BCnchen"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-4 inline-flex rounded-full border border-[#C9D5E2] bg-white px-4 py-2 text-sm font-medium text-[#3E5F87] transition hover:-translate-y-0.5 hover:bg-[#F8FAFC] hover:shadow-sm"
-          >
-            Google Maps öffnen
-          </a>
+              <div className="overflow-hidden rounded-[24px] border border-[#D8E1EA]">
+                <iframe
+                  title="Jugend Training Location Map"
+                  src="https://www.google.com/maps?q=Wilhelm-Hausenstein-Gymnasium+M%C3%BCnchen,+Fideliostra%C3%9Fe+145,+M%C3%BCnchen&z=16&output=embed"
+                  width="100%"
+                  height="340"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div className="overflow-hidden rounded-[24px] border border-[#D8E1EA]">
-          <iframe
-            title="Erwachsene Training Location Map"
-            src="https://www.google.com/maps?q=Turnhalle+der+Fachoberschule+f%C3%BCr+Technik,+Orleansstra%C3%9Fe+44,+M%C3%BCnchen&z=16&output=embed"
-            width="100%"
-            height="340"
-            style={{ border: 0 }}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
-      </div>
-
-      <div>
-        <div className="mb-4 rounded-[24px] border border-[#D8E1EA] bg-[#F8FAFC] px-6 py-5">
-          <div className="text-xs font-medium uppercase tracking-[0.18em] text-[#3E5F87]">
-            Jugend
-          </div>
-          <div className="mt-2 text-base font-medium text-[#1E1E1E]">
-            Wilhelm-Hausenstein-Gymnasium München
-          </div>
-          <p className="mt-1 text-sm leading-6 text-slate-600">
-            Fideliostraße 145
-          </p>
-
-          <a
-            href="https://www.google.com/maps/search/?api=1&query=Wilhelm-Hausenstein-Gymnasium+M%C3%BCnchen,+Fideliostra%C3%9Fe+145,+M%C3%BCnchen"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-4 inline-flex rounded-full border border-[#C9D5E2] bg-white px-4 py-2 text-sm font-medium text-[#3E5F87] transition hover:-translate-y-0.5 hover:bg-[#F8FAFC] hover:shadow-sm"
-          >
-            Google Maps öffnen
-          </a>
-        </div>
-
-        <div className="overflow-hidden rounded-[24px] border border-[#D8E1EA]">
-          <iframe
-            title="Jugend Training Location Map"
-            src="https://www.google.com/maps?q=Wilhelm-Hausenstein-Gymnasium+M%C3%BCnchen,+Fideliostra%C3%9Fe+145,+M%C3%BCnchen&z=16&output=embed"
-            width="100%"
-            height="340"
-            style={{ border: 0 }}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       <section id="contact" className="px-6 pb-20">
-  <div className="mx-auto max-w-7xl rounded-[40px] bg-[linear-gradient(135deg,#3E5F87_0%,#6b97c5_100%)] px-8 py-12 text-white shadow-[0_24px_60px_rgba(15,23,42,0.24)] lg:px-12">
-    <div className="max-w-3xl">
-      <div className="text-sm font-medium uppercase tracking-[0.18em] text-[#DCE7F2]">
-        {t.contactEyebrow}
-      </div>
+        <div className="mx-auto max-w-7xl rounded-[40px] bg-[linear-gradient(135deg,#3E5F87_0%,#6b97c5_100%)] px-8 py-12 text-white shadow-[0_24px_60px_rgba(15,23,42,0.24)] lg:px-12">
+          <div className="max-w-3xl">
+            <div className="text-sm font-medium uppercase tracking-[0.18em] text-[#DCE7F2]">
+              {t.contactEyebrow}
+            </div>
 
-      <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-        {t.contactTitle}
-      </h2>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+              {t.contactTitle}
+            </h2>
 
-      <p className="mt-4 text-base leading-7 text-[#EEF3F8]">
-        {t.contactDesc}
-      </p>
-    </div>
+            <p className="mt-4 text-base leading-7 text-[#EEF3F8]">
+              {t.contactDesc}
+            </p>
+          </div>
 
-    <div className="mt-10 grid gap-5 lg:grid-cols-3">
-      <article className="rounded-[28px] bg-white/10 p-6 ring-1 ring-white/15 backdrop-blur-sm">
-        <div className="text-xl font-semibold text-white">Stefan Praetorius</div>
-        <p className="mt-3 text-sm leading-6 text-[#EEF3F8]">
-          {t.contactPerson1Role}
-        </p>
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            <article className="rounded-[28px] bg-white/10 p-6 ring-1 ring-white/15 backdrop-blur-sm">
+              <div className="text-xl font-semibold text-white">
+                Stefan Praetorius
+              </div>
+              <p className="mt-3 text-sm leading-6 text-[#EEF3F8]">
+                {t.contactPerson1Role}
+              </p>
 
-        <a
-          href="mailto:stefan@example.com"
-          className="mt-6 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#1E1E1E] transition hover:bg-slate-100"
-        >
-          {t.contactEmailButton}
-        </a>
-      </article>
+              <a
+                href="mailto:stefan@example.com"
+                className="mt-6 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#1E1E1E] transition hover:bg-slate-100"
+              >
+                {t.contactEmailButton}
+              </a>
+            </article>
 
-      <article className="rounded-[28px] bg-white/10 p-6 ring-1 ring-white/15 backdrop-blur-sm">
-        <div className="text-xl font-semibold text-white">Moonjoo Hahm</div>
-        <p className="mt-3 text-sm leading-6 text-[#EEF3F8]">
-          {t.contactPerson2Role}
-        </p>
+            <article className="rounded-[28px] bg-white/10 p-6 ring-1 ring-white/15 backdrop-blur-sm">
+              <div className="text-xl font-semibold text-white">
+                Moonjoo Hahm
+              </div>
+              <p className="mt-3 text-sm leading-6 text-[#EEF3F8]">
+                {t.contactPerson2Role}
+              </p>
 
-        <a
-          href="mailto:moonjoo@example.com"
-          className="mt-6 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#1E1E1E] transition hover:bg-slate-100"
-        >
-          {t.contactEmailButton}
-        </a>
-      </article>
+              <a
+                href="mailto:moonjoo@example.com"
+                className="mt-6 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#1E1E1E] transition hover:bg-slate-100"
+              >
+                {t.contactEmailButton}
+              </a>
+            </article>
 
-      <article className="rounded-[28px] bg-white/10 p-6 ring-1 ring-white/15 backdrop-blur-sm">
-        <div className="text-xl font-semibold text-white">Hyungtaek Lim</div>
-        <p className="mt-3 text-sm leading-6 text-[#EEF3F8]">
-          {t.contactPerson3Role}
-        </p>
+            <article className="rounded-[28px] bg-white/10 p-6 ring-1 ring-white/15 backdrop-blur-sm">
+              <div className="text-xl font-semibold text-white">
+                Hyungtaek Lim
+              </div>
+              <p className="mt-3 text-sm leading-6 text-[#EEF3F8]">
+                {t.contactPerson3Role}
+              </p>
 
-        <a
-          href="mailto:hyungtaek@example.com"
-          className="mt-6 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#1E1E1E] transition hover:bg-slate-100"
-        >
-          {t.contactEmailButton}
-        </a>
-      </article>
-    </div>
-  </div>
-</section>
+              <a
+                href="mailto:hyungtaek@example.com"
+                className="mt-6 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#1E1E1E] transition hover:bg-slate-100"
+              >
+                {t.contactEmailButton}
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
